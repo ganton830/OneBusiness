@@ -18,6 +18,7 @@ class AccessLevelController extends Controller
          $this->middleware('auth');
     }
 
+
     public function add_corporation($corp_id = NULL)
     {   
         $data =array();
