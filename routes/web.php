@@ -14,14 +14,20 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('stocktransfer','StocktransferController@index');
+
+Route::resource('stocktransfer', 'StocktransferController', ['middleware' => 'auth']);
 
 Route::get('{item}/tmasterDetail', 'StocktransferController@tmasterDetail')->name('tmaster.details');
 
+Route::get('{item}/tmasterOriginalDetail', 'StocktransferController@tmasteOriginalDetail')->name('tmaster.originaldetails');
+
 Route::get('{item}/markToserved', 'StocktransferController@markToserved');
 
+Route::post('/saveRowPO', 'StocktransferController@saveRowPO');
 
 Auth::routes();
+
+
 
 Route::get('/home', 'HomeController@index');
 Route::any('/home_ajax_action', 'HomeController@home_ajax_action');
@@ -152,17 +158,6 @@ Route::get('/delete_city/{city_id}/{prov_id}', 'LocationsController@deletecity')
 #Purchase Order Module
 Route::any('/purchase_order/{corp_id}/{city_id}/{id?}', 'PurchaseOrderController@purchase_order');
 Route::any('/list_purchase_order', 'PurchaseOrderController@list_purchase_order');
-Route::any('/purchase_order/create_manual' ,'PurchaseOrderController@manual')->middleware('auth')->name('purchase_order.create_manual');
-Route::any('/purchase_order/create_automate' ,'PurchaseOrderController@automate')->middleware('auth')->name('purchase_order.create_automate');
-Route::any('/purchase_order/manual_suggest' ,'PurchaseOrderController@manual_suggest')->middleware('auth')->name('purchase_order.manual_suggest');
-Route::any('/purchase_order/auto_process' ,'PurchaseOrderController@auto_process')->middleware('auth');
-Route::post('/purchase_order/manual_save' ,'PurchaseOrderController@manual_save')->middleware('auth')->name('purchase_order.manual_save');
-Route::any('/purchase_order_pdf/{id}' ,'PurchaseOrderController@pdf')->middleware('auth')->name('purchase_order.pdf');
-Route::any('/purchase_order/ajax_render_branch_by_city', 'PurchaseOrderController@ajax_render_branch_by_city');
-Route::any('/purchase_order/ajax_render_item_by_prodline', 'PurchaseOrderController@ajax_render_item_by_prodline');
-Route::any('/purchase_order/ajax_render_branch_by_all_cities', 'PurchaseOrderController@ajax_render_branch_by_all_cities');
-Route::any('/purchase_order/ajax_render_template_by_city', 'PurchaseOrderController@ajax_render_template_by_city');
-Route::any('/purchase_order/ajax_render_template_by_all_cities', 'PurchaseOrderController@ajax_render_template_by_all_cities');
 
 Route::any('/product_branch', 'PurchaseOrderController@product_branch');
 Route::any('/retail_items', 'PurchaseOrderController@retail_items');
@@ -181,17 +176,10 @@ Route::post('branch_remittances/render_modal', 'BranchRemittanceController@rende
 Route::post('/stocks/{stock_id}/update_detail', 'StocksController@update_detail')->middleware('auth')->name('stocks.update_detail');
 Route::post('/stocks/{stock_id}/save_new_row_ajax', 'StocksController@save_new_row_ajax')->middleware('auth')->name('stocks.save_new_row_ajax');
 Route::post('/stocks/get_details', 'StocksController@get_details')->middleware('auth')->name('stocks.get_details');
+
 Route::resource('stocks', 'StocksController', ['middleware' => 'auth']);
 Route::any('/stocks/{stock_id}/{detail_id}' , 'StocksController@destroy_detail')->middleware('auth')->name('stocks.delete_detail');
 
 Route::post('users/verify-password', 'UsersController@verifyPassword')->middleware('auth')->name('users.verifyPassword');
 Route::post('users/generate-otp', 'UsersController@generateOTP')->middleware('auth')->name('users.generateOTP');
 Route::post('users/verify-otp', 'UsersController@verifyOTP')->middleware('auth')->name('users.verifyOTP');
-
-// Branch Request Module Routes
-Route::get("getEmployeeRequests", "Branch\EmployeeRequestController@getEmployeeRequests")->middleware('auth');
-Route::get("getEmployeeRequests2", "Branch\EmployeeRequestController@getEmployeeRequests2")->middleware('auth');
-Route::post("approveEmployeeRequest", "Branch\EmployeeRequestController@approveEmployeeRequest")->middleware('auth');
-Route::post("deleteEmployeeRequest", "Branch\EmployeeRequestController@deleteEmployeeRequest")->middleware('auth');
-Route::post("reactivateEmployeeRequest", "Branch\EmployeeRequestController@reactivateEmployeeRequest")->middleware('auth');
-Route::get("branchRequest", "Branch\EmployeeRequestController@index")->middleware('auth');

@@ -100,27 +100,27 @@
                                                                         {{$template->po_tmpl8_desc}}
                                                                         @endif
                                                                     </td>
-											                        <td>
+											                        <td 
                                                                     @if($item->served==0)
                                                                     Unserved
                                                                     @elseif($item->served==1)
                                                                     Served
                                                                     @endif
                                                                     </td>
-											                        <td  style="text-align: center;">{{$item->tot_pcs}}</td>
-											                        <td  style="text-align: center;">{{$item->total_amt}}</td>
+											                        <td  style="text-align: center;">{{number_format($item->tot_pcs)}}</td>
+											                        <td  style="text-align: right;">{{number_format((float)$item->total_amt, 2)}}</td>
 											                        <td  style="text-align: center;">
 
-                                                                        <a class="btn btn-success btn-md blue-tooltip " data-title="View Details"
-                                                                            href="{{ route('tmaster.details',$item->po_no) }}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit Corporation">
+                                                                        <a class="btn btn-success btn-md blue-tooltip " data-title="View PO Details"
+                                                                            href="{{ route('tmaster.details',$item->po_no) }}" data-toggle="tooltip" data-placement="top" title="" data-original-title="view PO detail">
                                                                             <span class="glyphicon glyphicon-eye-open"></span>
                                                                         </a>
-                                                                        @if($status!=2)  
-                                                                        <a class="btn btn-primary btn-md blue-tooltip " data-title="Edit" 
-                                                                           data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit Corporation">
-                                                                            <span class="glyphicon glyphicon-pencil"></span>
+                                                                      
+                                                                        <a class="btn btn-primary btn-md blue-tooltip " data-title="View original Details" 
+                                                                            href="{{ route('tmaster.originaldetails',$item->po_no) }}" data-toggle="tooltip" data-placement="top" title="" data-original-title="view original detail">
+                                                                            <span class="glyphicon glyphicon-eye-open"></span>
                                                                         </a>
-                                                                        @endif
+                                                                       
                                                                         <a class="btn btn-danger btn-md blue-tooltip " data-title="Edit" onclick="markToserved({{$item->po_no}})"
                                                                             data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit Corporation">
                                                                             <span class="glyphicon glyphicon-ok"></span>
@@ -333,7 +333,7 @@ function onEditRow(param){
 
 function showHidden(p){
     if(p==true)
-    $('#addNewTransfer').append('<a href="#"class="pull-right">New Stock Transfer</a>');
+    $('#addNewTransfer').append('<a href="{{route('stocktransfer.create' , ['corpID' => '7'] )}}"  class="pull-right">New Stock Transfer</a>');
     else
     $('#addNewTransfer').empty();
 }

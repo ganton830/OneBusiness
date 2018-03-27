@@ -65,28 +65,11 @@
   font-weight: normal;
 }
 
-span.error {
+td span.error {
   color: #a94442;
   font-weight: 400;
 }
 
-.print-section {
-  display: none;
-}
-
-@media print {
-  .print-section {
-    display: block;
-  }
-
-  .navbar, #sidebar-togle-sidebar-sec, .box-content .content, .alert {
-    display: none;
-  }
-}
-
-span.normal {
-  font-weight: normal !important;
-}
 
 
 
@@ -131,122 +114,24 @@ input.error{
   display: table;
 }
 
-.purchase_order_style{
-  padding: 0px;
-  width: 100%;
+
+/*  */
+.table_editable_1{
+  -webkit-box-sizing: border-box;
+    height: 30px;
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+    display: block;
+    width: 100%;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
 }
-
-.purchase_order_style > li {
-  list-style: none;
-  padding: 7px 35px;
-  border-bottom: 1px solid grey;
+.input_Cost::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
-
-.purchase_order_style .active{
-  border: 1px solid grey;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  border-bottom: none;
-}
-.purchase_order_style .last_item{
-  height: 35px;
-  float:none;
-  overflow:hidden;
-  border-bottom: 1px solid grey;
-}
-
-.purchase_order_style .active a{
-  color: black;
-}
-
-.purchase_order_style li a {
-  text-decoration: none;
-}
-
-.purchase_header_form {
-  margin-bottom: 20px;
-} 
-
-.purchase_choose .panel-body{
-  height: 500px;
-}
-
-.purchase_choose .first{
-  height: 300px;
-}
-
-.purchase_choose .panel-body{
-  overflow: auto;
-}
-
-.purchase_choose li { margin: 3px; padding: 0.4em;  height: 18px; box-sizing: unset; }
-
-.purchase_choose ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-}
-
-.purchase_choose .panel-body label{
-  font-weight: normal !important;
-}
-
-.blue_box{
-  color: #337ab7;
-}
-
-.red_box{
-  color: red;
-}
-
-.border_bottom {
-  border-bottom: 1px solid grey;
-  margin-bottom: 25px;
-  margin-top: 10px;  
-}
-
-.border_bottom span{
-  padding-right: 10px;
-}
-
-.done{
-  background: #b0e8b6;
-}
-
-.done .fa-check-circle{
-  color: green;
-}
-
-.loader {
-  height: 4px;
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-  background-color: #ddd;
-}
-.loader:before{
-  display: block;
-  position: absolute;
-  content: "";
-  left: -200px;
-  width: 200px;
-  height: 4px;
-  background-color: #2980b9;
-  animation: loading 2s linear infinite;
-}
-
-@keyframes loading {
-    from {left: -200px; width: 30%;}
-    50% {width: 30%;}
-    70% {width: 70%;}
-    80% { left: 50%;}
-    95% {left: 120%;}
-    to {left: 100%;}
-} 
-
-.selectable .ui-selecting { background: rgb(190, 215, 235) ; }
-.selectable .ui-selected { background: #76ACD6 ; color: white; }
-.selectable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
-.selectable li { margin: 3px; padding: 0px;  height: 22px; box-sizing: unset; }
-.purchase_choose li { margin: 3px; padding: 0px;  height: 22px; box-sizing: unset; }
